@@ -1,6 +1,6 @@
-# Mastering Angular 2 - Chapter 4, Example 1
+# Mastering Angular 2 - Chapter 4, Example 2
 
-This is a minimal example for an Angular 2 componentwith an element tag selector.
+This is a minimal example for an Angular 2 component with an attribute selector.
 
 Prerequisites: Node.js and TypeScript (see Chapter 1 for step by step environment setup)
 
