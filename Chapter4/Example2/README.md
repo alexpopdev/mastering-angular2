@@ -1,6 +1,6 @@
 # Mastering Angular 2 - Chapter 4, Example 2
 
-This is an example for an Angular 2 component with an element tag and clas selector and a child component that uses an element attribute selector.
+This is an example for an Angular 2 root component with an element and class selector and a child component with an element attribute selector.
 
 Prerequisites: Node.js and TypeScript (see Chapter 1 for step by step environment setup)
 
