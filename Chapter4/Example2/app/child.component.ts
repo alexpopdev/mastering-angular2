@@ -7,11 +7,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         <button class="btn btn-default" type="button" (click)="onClick()">Send message</button>`
 })
 export class ChildComponent { 
+  private static instanceCount: number = 0;  
+
+  instanceId: number;
   @Input() myText: string;
   @Output() onChildMessage = new EventEmitter<string>();
   
-  instanceId: number;
-  static instanceCount: number = 0;
   constructor(){
     ChildComponent.instanceCount += 1;
     this.instanceId = ChildComponent.instanceCount;
