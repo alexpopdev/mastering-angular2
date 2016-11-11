@@ -5,7 +5,11 @@ import {
   EventEmitter,
   OnInit,
   OnChanges,
-  DoCheck
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked
 } from '@angular/core';
 
 @Component({
@@ -15,8 +19,9 @@ import {
         <p>{{childEvents}}</p>
         <button class="btn btn-default" type="button" (click)="onClick()">Send message</button>`
 })
-export class ChildComponent implements OnInit, OnChanges, DoCheck {
-  childEvents: string[];
+export class ChildComponent implements OnInit, OnChanges, DoCheck, AfterContentInit,
+  AfterContentChecked, AfterViewInit, AfterViewChecked {
+    childEvents: string[];
   @Output() onChildMessage = new EventEmitter < string > ();
 
   constructor() {
@@ -34,7 +39,24 @@ export class ChildComponent implements OnInit, OnChanges, DoCheck {
   ngDoCheck(): void {
     this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngDoCheck`);
   }
-    onClick() {
-    this.onChildMessage.emit(`Hello from ChildComponent with at: ${new Date().toLocaleTimeString()}`);
+
+  ngAfterContentInit(): void {
+    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterContentInit`);
+  }
+
+    ngAfterContentChecked(): void {
+    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterContentChecked`);
+  }
+    ngAfterViewInit(): void {
+      console.log(`child: [${new Date().toLocaleTimeString()}]-ngAfterViewInit`);
+    //this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterViewInit`);
+  }
+    ngAfterViewChecked(): void {
+      console.log(`child: [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
+    //this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
+  }
+
+  onClick() {
+    this.onChildMessage.emit(`Hello from ChildComponent with at: ${new Date().toLocaleTimeString()}`);    
   }
 }

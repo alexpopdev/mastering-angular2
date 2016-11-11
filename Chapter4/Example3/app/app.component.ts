@@ -2,7 +2,11 @@ import {
   Component,
   OnInit,
   OnChanges,
-  DoCheck
+  DoCheck,  
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked
 } from '@angular/core';
 
 @Component({
@@ -43,6 +47,22 @@ export class AppComponent implements OnInit {
 
     ngDoCheck(): void {
     this.parentEvents.push(` [${new Date().toLocaleTimeString()}]-ngDoCheck`);
+  }
+
+    ngAfterContentInit(): void {
+    this.parentEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterContentInit`);
+  }
+
+    ngAfterContentChecked(): void {
+    this.parentEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterContentChecked`);
+  }
+    ngAfterViewInit(): void {
+      console.log(`parent: [${new Date().toLocaleTimeString()}]-ngAfterViewInit`);
+    //this.parentEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterViewInit`);
+  }
+    ngAfterViewChecked(): void {
+      console.log(`parent: [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
+    //this.parentEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
   }
 
     onChildMessageReceived($event: string) {
