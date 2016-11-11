@@ -12,11 +12,10 @@ import {
       <div class="row"><div class="col-md-12">
           <div class="page-header"><h1>{{title}}</h1></div>
           <p class="lead">These are the lifecycle events for the parent component:</p>
-          <p>{{parentEvents}}</p>      
-
+          <p>{{parentEvents}}</p>
       </div></div>
       <div class="row">
-        <div class="col-md-12" my-child-comp (onChildMessage)="onChildMessageReceived($event)"></div>   
+        <div class="col-md-12" my-child-comp (onChildMessage)="onChildMessageReceived($event)"></div>
       </div>
       <div class="row"><div class="col-md-12"><div class="well well-sm">         
             <p>Last message from child component: <strong>{{lastMessage}}</strong></p>

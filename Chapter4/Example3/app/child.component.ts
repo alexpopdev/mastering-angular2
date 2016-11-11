@@ -24,15 +24,15 @@ export class ChildComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngOnInit(): void {
-    this.childEvents.push(`${new Date().toLocaleTimeString()} - ngOnInit;`);
+    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngOnInit`);
   }
 
   ngOnChanges(): void {
-    this.childEvents.push(`${new Date().toLocaleTimeString()} - ngOnChanges;`);
+    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngOnChanges`);
   }
 
   ngDoCheck(): void {
-    this.childEvents.push(`${new Date().toLocaleTimeString()}-ngDoCheck`);
+    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngDoCheck`);
   }
     onClick() {
     this.onChildMessage.emit(`Hello from ChildComponent with at: ${new Date().toLocaleTimeString()}`);
