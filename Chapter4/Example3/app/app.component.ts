@@ -15,7 +15,7 @@ import {
     <div class="container text-center">
       <div class="row"><div class="col-md-12">
           <div class="page-header"><h1>{{title}}</h1></div>
-          <p class="lead">These are the lifecycle events for the parent component:</p>
+          <h2>These are the lifecycle events for the parent component:</h2>
           <p class="lead">Parent component initial lifecycle events:</p>
           <p>{{initialParentEvents}}</p>
           <p class="lead">Parent component continuous lifecycle events:</p>

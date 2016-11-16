@@ -15,12 +15,12 @@ import {
 @Component({
   selector: 'div[my-child-comp]',
   template: `
-  <p class="lead">These are the lifecycle events for a child component:</p>
+  <h2>These are the lifecycle events for a child component:</h2>
   <p class="lead">Child component initial lifecycle events:</p>
   <p>{{initialChildEvents}}</p>
   <p class="lead">Child component continuous lifecycle events:</p>
   <p>{{continuousChildEvents}}</p>
-  <button class="btn btn-default" type="button" (click)="onClick()">Send message</button>`
+  <button class="btn btn-default" type="button" (click)="onClick()">Send message from child to parent</button>`
 })
 export class ChildComponent implements OnInit, OnChanges, DoCheck, AfterContentInit,
 AfterContentChecked, AfterViewInit, AfterViewChecked {
@@ -43,14 +43,14 @@ AfterContentChecked, AfterViewInit, AfterViewChecked {
       this.continuousChildEvents.push(message);
     }
   }
+  
+  ngOnChanges(): void {
+    this.logEvent(` [${new Date().toLocaleTimeString()}]-ngOnChanges`);
+  }
 
   ngOnInit(): void {
     this.logEvent(` [${new Date().toLocaleTimeString()}]-ngOnInit`);
-  }
-
-    ngOnChanges(): void {
-    this.logEvent(` [${new Date().toLocaleTimeString()}]-ngOnChanges`);
-  }
+  }  
 
     ngDoCheck(): void {
     this.logEvent(` [${new Date().toLocaleTimeString()}]-ngDoCheck`);
