@@ -15,48 +15,68 @@ import {
 @Component({
   selector: 'div[my-child-comp]',
   template: `
-     <p class="lead">This are the lifecycle events for a child component:</p>
-        <p>{{childEvents}}</p>
-        <button class="btn btn-default" type="button" (click)="onClick()">Send message</button>`
+  <p class="lead">These are the lifecycle events for a child component:</p>
+  <p class="lead">Child component initial lifecycle events:</p>
+  <p>{{initialChildEvents}}</p>
+  <p class="lead">Child component continuous lifecycle events:</p>
+  <p>{{continuousChildEvents}}</p>
+  <button class="btn btn-default" type="button" (click)="onClick()">Send message</button>`
 })
 export class ChildComponent implements OnInit, OnChanges, DoCheck, AfterContentInit,
-  AfterContentChecked, AfterViewInit, AfterViewChecked {
-    childEvents: string[];
+AfterContentChecked, AfterViewInit, AfterViewChecked {
+  initialChildEvents: string[];
+  continuousChildEvents: string[];
   @Output() onChildMessage = new EventEmitter < string > ();
 
+  private hasInitialLifecycleFinished: boolean = false;
+  private ngAfterViewCheckedEventCount: number = 0;
+
   constructor() {
-    this.childEvents = [];
+    this.initialChildEvents = [];
+    this.continuousChildEvents = [];
+  }
+
+  private logEvent(message: string) {
+    if (!this.hasInitialLifecycleFinished) {
+      this.initialChildEvents.push(message);
+    } else {
+      this.continuousChildEvents.push(message);
+    }
   }
 
   ngOnInit(): void {
-    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngOnInit`);
+    this.logEvent(` [${new Date().toLocaleTimeString()}]-ngOnInit`);
   }
 
-  ngOnChanges(): void {
-    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngOnChanges`);
+    ngOnChanges(): void {
+    this.logEvent(` [${new Date().toLocaleTimeString()}]-ngOnChanges`);
   }
 
-  ngDoCheck(): void {
-    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngDoCheck`);
+    ngDoCheck(): void {
+    this.logEvent(` [${new Date().toLocaleTimeString()}]-ngDoCheck`);
   }
 
-  ngAfterContentInit(): void {
-    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterContentInit`);
+    ngAfterContentInit(): void {
+    this.logEvent(` [${new Date().toLocaleTimeString()}]-ngAfterContentInit`);
   }
 
     ngAfterContentChecked(): void {
-    this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterContentChecked`);
+    this.logEvent(` [${new Date().toLocaleTimeString()}]-ngAfterContentChecked`);
   }
-    ngAfterViewInit(): void {
-      console.log(`child: [${new Date().toLocaleTimeString()}]-ngAfterViewInit`);
+  ngAfterViewInit(): void {
+    console.log(`child: [${new Date().toLocaleTimeString()}]-ngAfterViewInit`);
     //this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterViewInit`);
   }
-    ngAfterViewChecked(): void {
-      console.log(`child: [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
-    //this.childEvents.push(` [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
+  ngAfterViewChecked(): void {
+    this.ngAfterViewCheckedEventCount += 1;
+    if (this.ngAfterViewCheckedEventCount === 2) {
+      this.hasInitialLifecycleFinished = true;
+    }
+
+    console.log(`child: [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
   }
 
   onClick() {
-    this.onChildMessage.emit(`Hello from ChildComponent with at: ${new Date().toLocaleTimeString()}`);    
+    this.onChildMessage.emit(`Hello from ChildComponent at: ${new Date().toLocaleTimeString()}`);
   }
 }
