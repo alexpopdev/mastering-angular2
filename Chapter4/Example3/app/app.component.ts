@@ -1,12 +1,6 @@
 import {
-  Component,
-  OnInit,
-  OnChanges,
-  DoCheck,
-  AfterContentInit,
-  AfterContentChecked,
-  AfterViewInit,
-  AfterViewChecked
+  Component, OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked,
+  AfterViewInit, AfterViewChecked
 } from '@angular/core';
 
 @Component({
@@ -58,19 +52,19 @@ export class AppComponent implements OnInit {
     this.logEvent(` [${new Date().toLocaleTimeString()}]-ngOnInit`);
   }
 
-    ngOnChanges(): void {
+  ngOnChanges(): void {
     this.logEvent(` [${new Date().toLocaleTimeString()}]-ngOnChanges`);
   }
 
-    ngDoCheck(): void {
+  ngDoCheck(): void {
     this.logEvent(` [${new Date().toLocaleTimeString()}]-ngDoCheck`);
   }
 
-    ngAfterContentInit(): void {
+  ngAfterContentInit(): void {
     this.logEvent(` [${new Date().toLocaleTimeString()}]-ngAfterContentInit`);
   }
 
-    ngAfterContentChecked(): void {
+  ngAfterContentChecked(): void {
     this.logEvent(` [${new Date().toLocaleTimeString()}]-ngAfterContentChecked`);
   }
   ngAfterViewInit(): void {
@@ -82,11 +76,11 @@ export class AppComponent implements OnInit {
     if (this.ngAfterViewCheckedEventCount === 2) {
       this.hasInitialLifecycleFinished = true;
     }
-    
+
     console.log(`parent: [${new Date().toLocaleTimeString()}]-ngAfterViewChecked`);
   }
 
-    onChildMessageReceived($event: string) {
+  onChildMessageReceived($event: string) {
     this.lastMessage = $event;
   }
 }
