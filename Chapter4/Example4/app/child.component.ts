@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AppService } from './app.service';
 
 @Component({
     selector: 'div[my-child-comp]',
@@ -13,12 +14,17 @@ export class ChildComponent {
   @Input() myText: string;
   @Output() onChildMessage = new EventEmitter<string>();
   
-  constructor(){
+  constructor(private appService: AppService){
     ChildComponent.instanceCount += 1;
     this.instanceId = ChildComponent.instanceCount;
   }
 
   onClick(){
+    if(this.appService.getComponentMessages().length > 3){
+      this.onChildMessage.emit(`There are too many messages ...`);
+      return;
+    }
+    
     this.onChildMessage.emit(`Hello from ChildComponent with instance id: ${this.instanceId}`);
   }
 }
