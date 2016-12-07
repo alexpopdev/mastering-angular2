@@ -22,7 +22,7 @@ export class AppService {
     return this.componentDescriptions[index];
   }
 
-  sendAppServiceMessage(message: string): void {
+  sendMessage(message: string): void {
     this.componentMessages.push(message);
     this.appServiceMessage$.emit(message);
   }
