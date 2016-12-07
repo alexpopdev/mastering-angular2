@@ -7,9 +7,7 @@ import { AppService } from './app.service';
         <p>{{myText}}</p>
         <button class="btn btn-default" type="button" (click)="onClick()">Send message</button>`
 })
-export class ChildComponent { 
-  private static instanceCount: number = 0;  
-
+export class ChildComponent {
   @Input() index: number; 
   myText: string;
   
