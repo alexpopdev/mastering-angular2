@@ -1,11 +1,13 @@
 import {
-  Injectable
+  Injectable,
+  EventEmitter
 } from '@angular/core';
 
 @Injectable()
 export class AppService {
   private componentDescriptions: string[];
   private componentMessages: string[];
+  public appServiceMessage$ = new EventEmitter <string> ();
 
   constructor() {
     this.componentDescriptions = [
@@ -20,11 +22,12 @@ export class AppService {
     return this.componentDescriptions[index];
   }
 
-  onComponentMessageReceived(message: string): void {
-    this.componentMessages.push(message);    
+  sendAppServiceMessage(message: string): void {
+    this.componentMessages.push(message);
+    this.appServiceMessage$.emit(message);
   }
 
-   getComponentMessages(): string[] {    
+  getComponentMessages(): string[] {
     return this.componentMessages;
   }
 }

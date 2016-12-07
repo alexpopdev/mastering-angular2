@@ -10,21 +10,19 @@ import { AppService } from './app.service';
 export class ChildComponent { 
   private static instanceCount: number = 0;  
 
-  instanceId: number;
-  @Input() myText: string;
-  @Output() onChildMessage = new EventEmitter<string>();
+  @Input() index: number; 
+  myText: string;
   
   constructor(private appService: AppService){
-    ChildComponent.instanceCount += 1;
-    this.instanceId = ChildComponent.instanceCount;
+    this.myText = appService.getComponentMessages()[this.index];
   }
 
   onClick(){
     if(this.appService.getComponentMessages().length > 3){
-      this.onChildMessage.emit(`There are too many messages ...`);
+      this.appService.sendAppServiceMessage(`There are too many messages ...`);
       return;
     }
     
-    this.onChildMessage.emit(`Hello from ChildComponent with instance id: ${this.instanceId}`);
+    this.appService.sendAppServiceMessage(`Hello from ChildComponent with index: ${this.index}`);
   }
 }

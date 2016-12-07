@@ -1,7 +1,7 @@
 {
-  "name": "mastering-angular2-ch4-ex2",
+  "name": "mastering-angular2-ch4-ex4",
   "version": "1.0.0",
-  "description": "Mastering Angular 2 - Chapter 4, Example 2",
+  "description": "Mastering Angular 2 - Chapter 4, Example 4",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
