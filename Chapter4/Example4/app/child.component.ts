@@ -1,30 +1,25 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import {
-  AppService
-} from './app.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'div[my-child-comp]',
-  template: `
+    selector: 'div[my-child-comp]',
+    template: `
         <p>{{myText}}</p>
         <button class="btn btn-default" type="button" (click)="onClick()">Send message</button>`
 })
-export class ChildComponent implements OnInit {
-  @Input() index: number;
-  myText: string;
+export class ChildComponent { 
+  private static instanceCount: number = 0;  
 
-  constructor(private appService: AppService) {}
-
-  ngOnInit() {
-    this.myText = this.appService.getComponentDescription(this.index);
+  instanceId: number;
+  @Input() myText: string;
+  @Output() onChildMessage = new EventEmitter<string>();
+  
+  constructor(){
+    ChildComponent.instanceCount += 1;
+    this.instanceId = ChildComponent.instanceCount;
+    this.myText = 'This is the default child component text.'
   }
 
-  onClick() {
-    if (this.appService.getComponentMessages().length > 3) {
-      this.appService.sendMessage(`There are too many messages ...`);
-      return;
-    }
-
-    this.appService.sendMessage(`Hello from ChildComponent with index: ${this.index}`);
+  onClick(){
+    this.onChildMessage.emit(`Hello from ChildComponent with instance id: ${this.instanceId}`);
   }
 }
