@@ -16,7 +16,7 @@ export class ChildComponent {
   constructor(){
     ChildComponent.instanceCount += 1;
     this.instanceId = ChildComponent.instanceCount;
-    this.myText = 'This is the default child component text.'
+    this.myText = 'This is the default child component text.';
   }
 
   onClick(){
