@@ -6,9 +6,9 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
         <p>{{myText}}</p>
         <p>
           <label for="child-component-input-{{myId}}">Override component message:</label>
-          <input id="child-component-input-{{myId}}" type="text" [(ngModel)]="message">
+          <input id="child-component-input-{{myId}}" type="text" [(ngModel)]="message" [style.background-color]="!message ? 'red': 'white'">
         </p>
-        <p><button class="btn btn-default" type="button" (click)="onClick()">Send message</button></p>`
+        <p><button [disabled]="!message" class="btn btn-default" type="button" (click)="onClick()">Send message</button></p>`
 })
 export class ChildComponent { 
   @Input() myId: number;
